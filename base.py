@@ -15,7 +15,7 @@ class BaseModule(decman.Module):
             "linux",
             "linux-firmware",
             "linux-headers",
-            "intel-ucode"  # for intel processors
+            "intel-ucode",  # for intel processors
             # Filesystem tools
             "btrfs-progs",
             "dosfstools",
