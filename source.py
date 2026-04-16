@@ -10,6 +10,7 @@ from audio import AudioModule
 from base import BaseModule
 from dev import DevModule
 from gaming import GamingModule
+from greetd import GreetdModule
 from users import make_user_manager
 
 # ── modules ───────────────────────────────────────────────────────────────────
@@ -17,6 +18,7 @@ decman.modules += [
     # Core system (always present)
     BaseModule(),
     AudioModule(),
+    GreetdModule(),
     # Developer tooling — with UI (browser + ghostty)
     DevModule("dev", include_ui=True),
     DevModule("headless", include_ui=False),

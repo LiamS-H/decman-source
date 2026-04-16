@@ -35,12 +35,6 @@ class HyprlandModule(decman.Module):
             "wofi",
             # Notifications
             "mako",
-            # Terminal (Ghostty - see AUR below)
-            # Fonts & theming
-            # "noto-fonts",
-            # "noto-fonts-emoji",
-            # "ttf-jetbrains-mono-nerd",
-            # "ttf-font-awesome",
             # Clipboard
             "wl-clipboard",
             "cliphist",
@@ -65,10 +59,15 @@ class HyprlandModule(decman.Module):
 
     @aur.packages
     def aur_pkgs(self) -> set[str]:
-        return {
-            # "ghostty-git",  # GPU-accelerated terminal
-        }
+        return set()
 
     @systemd.units
     def units(self) -> set[str]:
-        return {"greetd.service"}
+        return set()
+
+    def files(self) -> dict[str, decman.File]:
+        return {
+            "/usr/share/wayland-sessions/hyprland.desktop": decman.File(
+                source_file="./files/usr/share/wayland-sessions/hyprland.desktop"
+            ),
+        }

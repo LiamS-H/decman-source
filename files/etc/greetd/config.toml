@@ -1,0 +1,9 @@
+[terminal]
+vt = 1
+
+[default_session]
+# --remember: will remember the last used session/user
+# --time: shows current time
+# --cmd: sets the default command if none is selected
+command = "tuigreet --time --remember --cmd Hyprland"
+user = "greeter"

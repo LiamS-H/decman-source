@@ -64,4 +64,5 @@ class GamingModule(decman.Module):
 
     @systemd.units
     def units(self) -> set[str]:
-        return {"bluetooth.service"}
+        # return {"bluetooth.service"}
+        return set()
