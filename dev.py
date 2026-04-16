@@ -71,6 +71,7 @@ class DevModule(decman.Module):
             "shfmt",
             "shellcheck",
             "rustup",  # manages rust toolchain + cargo
+            "uv",  # fast Python package manager
         }
 
         return base
@@ -78,9 +79,7 @@ class DevModule(decman.Module):
     @aur.packages
     def aur_pkgs(self) -> set[str]:
         base = {
-            "uv",  # fast Python package manager
             "oh-my-zsh-git",
-            "zsh-theme-powerlevel10k-git",
         }
 
         return base
