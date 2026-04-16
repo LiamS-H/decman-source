@@ -1,5 +1,6 @@
 import decman
 from decman.plugins import pacman, aur, systemd
+from hyprland.yazi import YaziModule
 
 
 class HyprlandModule(decman.Module):
@@ -13,6 +14,7 @@ class HyprlandModule(decman.Module):
     def __init__(self, user):
         self.user = user
         super().__init__("hyprland")
+        decman.modules.append(YaziModule())
 
     @pacman.packages
     def pkgs(self) -> set[str]:
@@ -54,7 +56,10 @@ class HyprlandModule(decman.Module):
             # Screenshot helper
             "hyprshot",
             "greetd-tuigreet",  # TUI greeter for greetd
+            # Terminal
+            "yazi",
             "ghostty",
+            # File System
         }
 
     @aur.packages
