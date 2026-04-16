@@ -57,14 +57,15 @@ class HyprlandModule(decman.Module):
             "nwg-look",
             # Display manager
             "greetd",
+            # Screenshot helper
+            "hyprshot",
+            "greetd-tuigreet",  # TUI greeter for greetd
         }
 
     @aur.packages
     def aur_pkgs(self) -> set[str]:
         return {
-            "ghostty",  # GPU-accelerated terminal
-            "greetd-tuigreet",  # TUI greeter for greetd
-            "hyprshot",  # Screenshot helper
+            "ghostty-git",  # GPU-accelerated terminal
         }
 
     @systemd.units
