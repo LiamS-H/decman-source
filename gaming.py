@@ -27,18 +27,15 @@ class GamingModule(decman.Module):
             # Gaming utilities
             "gamemode",
             "lib32-gamemode",
-            "mangohud",         # in-game overlay
-            "lib32-mangohud",
+            # "mangohud",  # in-game overlay
+            # "lib32-mangohud",
             # Emulation - cores
             "retroarch",
             "retroarch-assets-xmb",
-            "libretro-beetle-psx-hw",  # PS1
-            "libretro-dolphin",        # GC / Wii
-            "libretro-mgba",           # GBA
-            "libretro-snes9x",         # SNES
-            # Controller support
-            "game-devices-udev",
-            "xboxdrv",
+            # "libretro-beetle-psx-hw",  # PS1
+            # "libretro-dolphin",  # GC / Wii
+            # "libretro-mgba",  # GBA
+            # "libretro-snes9x",  # SNES
             # Browser
             "chromium",
             "xdg-utils",
@@ -47,13 +44,16 @@ class GamingModule(decman.Module):
     @aur.packages
     def aur_pkgs(self) -> set[str]:
         return {
-            "google-chrome",    # comment out if you prefer chromium above
-            "protonup-qt",      # Proton-GE manager
-            "heroic-games-launcher-bin",  # Epic / GOG launcher
-            "bottles",          # Wine prefix manager
-            "ryujinx",          # Nintendo Switch emulator
-            "rpcs3-git",        # PS3 emulator
-            "lutris",           # unified game launcher
+            "google-chrome",  # comment out if you prefer chromium above
+            "protonup-qt",  # Proton-GE manager
+            # "heroic-games-launcher-bin",  # Epic / GOG launcher
+            "bottles",  # Wine prefix manager
+            # "ryujinx",  # Nintendo Switch emulator
+            # "rpcs3-git",  # PS3 emulator
+            # "lutris",  # unified game launcher
+            # Controller support
+            "game-devices-udev",
+            "xboxdrv",
         }
 
     @systemd.units
