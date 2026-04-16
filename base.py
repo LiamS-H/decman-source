@@ -26,7 +26,6 @@ class BaseModule(decman.Module):
             "openssh",
             # System utilities
             "sudo",
-            "vi",
             "git",
             "curl",
             "wget",
