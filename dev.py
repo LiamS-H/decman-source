@@ -49,8 +49,7 @@ class DevModule(decman.Module):
             "jq",
             "fzf",
             "bat",
-            # "eza",              # modern ls
-            # "zoxide",           # smart cd
+            "zoxide",  # smart cd
             "docker",
             "docker-compose",
             # Build tools (rust needs these)
@@ -85,3 +84,9 @@ class DevModule(decman.Module):
     @systemd.units
     def units(self) -> set[str]:
         return {"docker.service"}
+
+    def files(self) -> dict[str, decman.File]:
+        return {
+            f"/home/{self.user}/.zshrc": decman.File(source_file="./files/zsh/.zshrc"),
+            f"/home/{self.user}/.vimrc": decman.File(source_file="./files/vim/.vimrc"),
+        }
