@@ -60,12 +60,13 @@ class HyprlandModule(decman.Module):
             # Screenshot helper
             "hyprshot",
             "greetd-tuigreet",  # TUI greeter for greetd
+            "ghostty",
         }
 
     @aur.packages
     def aur_pkgs(self) -> set[str]:
         return {
-            "ghostty-git",  # GPU-accelerated terminal
+            # "ghostty-git",  # GPU-accelerated terminal
         }
 
     @systemd.units

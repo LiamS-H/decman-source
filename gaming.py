@@ -51,15 +51,15 @@ class GamingModule(decman.Module):
     def aur_pkgs(self) -> set[str]:
         return {
             "google-chrome",  # comment out if you prefer chromium above
-            "protonup-qt",  # Proton-GE manager
+            # "protonup-qt",  # Proton-GE manager
             # "heroic-games-launcher-bin",  # Epic / GOG launcher
-            "bottles",  # Wine prefix manager
+            # "bottles",  # Wine prefix manager
             # "ryujinx",  # Nintendo Switch emulator
             # "rpcs3-git",  # PS3 emulator
             # "lutris",  # unified game launcher
             # Controller support
-            "game-devices-udev",
-            "xboxdrv",
+            # "game-devices-udev",
+            # "xboxdrv",
         }
 
     @systemd.units

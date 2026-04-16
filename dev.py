@@ -78,9 +78,7 @@ class DevModule(decman.Module):
 
     @aur.packages
     def aur_pkgs(self) -> set[str]:
-        base = {
-            "oh-my-zsh-git",
-        }
+        base = {"oh-my-zsh-git", "google-chrome"}
 
         return base
 
