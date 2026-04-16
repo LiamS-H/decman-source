@@ -12,11 +12,6 @@ from dev import DevModule
 from gaming import GamingModule
 from users import make_user_manager
 
-# ── pacman configuration ──────────────────────────────────────────────────────
-# Enable multilib (required for Steam and 32-bit gaming libs).
-# You must also have the [multilib] section uncommented in /etc/pacman.conf.
-decman.pacman.options["ParallelDownloads"] = "5"
-
 # ── modules ───────────────────────────────────────────────────────────────────
 decman.modules += [
     # Core system (always present)
