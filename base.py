@@ -15,9 +15,7 @@ class BaseModule(decman.Module):
             "linux",
             "linux-firmware",
             "linux-headers",
-            # Boot
-            "grub",
-            "efibootmgr",
+            "intel-ucode"  # for intel processors
             # Filesystem tools
             "btrfs-progs",
             "dosfstools",
@@ -28,6 +26,7 @@ class BaseModule(decman.Module):
             "openssh",
             # System utilities
             "sudo",
+            "vi",
             "git",
             "curl",
             "wget",
@@ -40,12 +39,6 @@ class BaseModule(decman.Module):
             "rsync",
             "which",
             "ufw",
-            # Audio (pipewire stack)
-            "pipewire",
-            "pipewire-alsa",
-            "pipewire-pulse",
-            "pipewire-jack",
-            "wireplumber",
         }
 
     @aur.packages
