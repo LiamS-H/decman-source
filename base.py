@@ -1,0 +1,73 @@
+import decman
+from decman.plugins import aur, pacman, systemd
+
+
+class BaseModule(decman.Module):
+    def __init__(self):
+        super().__init__("base")
+
+    @pacman.packages
+    def pkgs(self) -> set[str]:
+        return {
+            # Base system
+            "base",
+            "base-devel",
+            "linux",
+            "linux-firmware",
+            "linux-headers",
+            # Boot
+            "grub",
+            "efibootmgr",
+            # Filesystem tools
+            "btrfs-progs",
+            "dosfstools",
+            "e2fsprogs",
+            # Network
+            "networkmanager",
+            "network-manager-applet",
+            "openssh",
+            # System utilities
+            "sudo",
+            "git",
+            "curl",
+            "wget",
+            "htop",
+            "man-db",
+            "man-pages",
+            "unzip",
+            "zip",
+            "tar",
+            "rsync",
+            "which",
+            "ufw",
+            # Audio (pipewire stack)
+            "pipewire",
+            "pipewire-alsa",
+            "pipewire-pulse",
+            "pipewire-jack",
+            "wireplumber",
+        }
+
+    @aur.packages
+    def aurpkgs(self) -> set[str]:
+        return {"decman"}
+
+    @systemd.units
+    def units(self) -> set[str]:
+        return {
+            "NetworkManager.service",
+            "sshd.service",
+            "ufw.service",
+        }
+
+    def files(self) -> dict[str, decman.File]:
+        return {
+            "/etc/mkinitcpio.conf": decman.File(
+                source_file="./files/etc/mkinitcpio.conf"
+            ),
+            "/etc/pacman.conf": decman.File(source_file="./files/etc/pacman.conf"),
+        }
+
+    def on_change(self, store):
+        decman.prg(["mkinitcpio", "-P"])
+        decman.prg(["pacman", "-Sy"])
