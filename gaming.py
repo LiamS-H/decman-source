@@ -1,6 +1,8 @@
 import decman
 from decman.plugins import pacman, aur, systemd
 
+from hyprland.base import HyprlandModule
+
 
 class GamingModule(decman.Module):
     """
@@ -8,8 +10,12 @@ class GamingModule(decman.Module):
     Requires HyprlandModule for the display stack.
     """
 
-    def __init__(self):
+    user: str
+
+    def __init__(self, user):
         super().__init__("gaming")
+        self.user = user
+        decman.modules.append(HyprlandModule(self.user))
 
     @pacman.packages
     def pkgs(self) -> set[str]:

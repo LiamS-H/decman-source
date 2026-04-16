@@ -6,8 +6,8 @@ Run with:  sudo decman ~/source/source.py
 import decman
 from decman.plugins import pacman
 
+from audio import AudioModule
 from base import BaseModule
-from hyprland import HyprlandModule
 from dev import DevModule
 from gaming import GamingModule
 from users import make_user_manager
@@ -16,19 +16,11 @@ from users import make_user_manager
 decman.modules += [
     # Core system (always present)
     BaseModule(),
-    # Display stack (dev + gaming profiles share this)
-    HyprlandModule(),
+    AudioModule(),
     # Developer tooling — with UI (browser + ghostty)
-    DevModule(include_ui=True),
-    # Gaming suite
-    GamingModule(),
-    # Headless dev tooling — no UI packages
-    # DevModule(include_ui=False) is merged below via shared packages;
-    # the headless user simply doesn't launch Hyprland.
-    # If you want headless to be a completely separate, minimal install,
-    # comment out HyprlandModule and GamingModule above and uncomment:
-    # DevModule(include_ui=False),
-    # Users
+    DevModule("dev", include_ui=True),
+    DevModule("headless", include_ui=False),
+    GamingModule("gaming"),
     make_user_manager(),
 ]
 
@@ -37,8 +29,3 @@ decman.modules += [
 decman.systemd.enabled_units |= {
     "bluetooth.service",
 }
-
-# ── system files ──────────────────────────────────────────────────────────────
-# Uncomment and point to your dotfiles repo as needed, e.g.:
-# from decman import File, Directory
-# decman.files["/etc/pacman.conf"] = File(source_file="./dotfiles/pacman.conf")

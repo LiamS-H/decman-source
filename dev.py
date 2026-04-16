@@ -1,5 +1,6 @@
 import decman
 from decman.plugins import pacman, aur, systemd
+from hyprland.base import HyprlandModule
 
 
 class DevModule(decman.Module):
@@ -8,13 +9,22 @@ class DevModule(decman.Module):
     Used by both 'dev' (with UI) and 'headless' (without UI) profiles.
     """
 
-    def __init__(self, include_ui: bool = True):
+    user: str
+    include_ui: bool
+
+    def __init__(self, user, include_ui: bool = True):
         """
         Args:
+            user: string representing user name and home location
             include_ui: Set to False for the headless profile to skip
                         browser, Ghostty, and Hyprland-adjacent packages.
         """
-        name = "dev" if include_ui else "dev-headless"
+        self.user = user
+        self.include_ui = include_ui
+        if self.include_ui:
+            decman.modules.append(HyprlandModule(self.user))
+
+        name = "dev" if self.include_ui else "dev-headless"
         super().__init__(name)
 
     @pacman.packages
@@ -41,7 +51,6 @@ class DevModule(decman.Module):
             "bat",
             # "eza",              # modern ls
             # "zoxide",           # smart cd
-            # "starship",         # shell prompt (alternative to oh-my-zsh themes)
             "docker",
             "docker-compose",
             # Build tools (rust needs these)
@@ -50,8 +59,9 @@ class DevModule(decman.Module):
             "clang",
             "llvm",
             # Python (uv manages Python versions, but system python is handy)
-            "python",
-            "python-pip",
+            # "python",
+            # "python-pip",
+            # Node
             # "nodejs",          # Node (many LSPs need it)
             "bun",
             "pnpm",
