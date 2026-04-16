@@ -24,6 +24,8 @@ class BaseModule(decman.Module):
             "networkmanager",
             "network-manager-applet",
             "openssh",
+            "bluez",
+            "bluez-utils",
             # System utilities
             "sudo",
             "git",
