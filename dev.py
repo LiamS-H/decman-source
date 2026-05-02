@@ -1,4 +1,5 @@
 import decman
+from decman import File, Directory
 from decman.plugins import pacman, aur, systemd
 from hyprland.base import HyprlandModule
 
@@ -23,6 +24,14 @@ class DevModule(decman.Module):
         self.include_ui = include_ui
         if self.include_ui:
             decman.modules.append(HyprlandModule(self.user))
+
+        decman.directories[f"/home/{self.user}/.config/nvim"] = Directory (
+            source_directory="./nvim",
+            bin_files=False,
+            encoding="utf-8",
+            owner=self.user,
+            permissions=0o600,
+        )
 
         name = "dev" if self.include_ui else "dev-headless"
         super().__init__(name)

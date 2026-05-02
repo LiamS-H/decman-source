@@ -1,4 +1,5 @@
 import decman
+from decman import File, Directory
 from decman.plugins import pacman, aur, systemd
 from hyprland.yazi import YaziModule
 
@@ -15,6 +16,21 @@ class HyprlandModule(decman.Module):
         self.user = user
         super().__init__("hyprland")
         decman.modules.append(YaziModule())
+        decman.directories[f"/home/{self.user}/.config/hypr"] = Directory (
+            source_directory="./hyprland/hypr",
+            bin_files=False,
+            encoding="utf-8",
+            owner=self.user,
+            permissions=0o600,
+        )
+
+        decman.directories[f"/home/{self.user}/.config/waybar"] = Directory (
+            source_directory="./hyprland/waybar",
+            bin_files=False,
+            encoding="utf-8",
+            owner=self.user,
+            permissions=0o600,
+        )
 
     @pacman.packages
     def pkgs(self) -> set[str]:
@@ -33,6 +49,7 @@ class HyprlandModule(decman.Module):
             "qt6-wayland",
             # Status bar
             "waybar",
+
             # App launcher
             "wofi",
             # Notifications
@@ -76,3 +93,4 @@ class HyprlandModule(decman.Module):
                 source_file="./files/usr/share/wayland-sessions/hyprland.desktop"
             ),
         }
+
