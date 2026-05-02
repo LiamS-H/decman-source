@@ -16,6 +16,8 @@ class BaseModule(decman.Module):
             "linux-firmware",
             "linux-headers",
             "intel-ucode",  # for intel processors
+            # Location
+            "geoclue",
             # Filesystem tools
             "btrfs-progs",
             "dosfstools",
@@ -26,6 +28,8 @@ class BaseModule(decman.Module):
             "openssh",
             "bluez",
             "bluez-utils",
+            # Brightness
+            "brightnessctl",
             # System utilities
             "sudo",
             "git",
@@ -44,7 +48,10 @@ class BaseModule(decman.Module):
 
     @aur.packages
     def aurpkgs(self) -> set[str]:
-        return {"decman"}
+        return {
+            "decman",
+            "automatic-timezoned",
+        }
 
     @systemd.units
     def units(self) -> set[str]:
@@ -52,6 +59,7 @@ class BaseModule(decman.Module):
             "NetworkManager.service",
             "sshd.service",
             "ufw.service",
+            "automatic-timezoned.service",
         }
 
     def files(self) -> dict[str, decman.File]:
@@ -65,3 +73,7 @@ class BaseModule(decman.Module):
     def on_change(self, store):
         decman.prg(["mkinitcpio", "-P"])
         decman.prg(["pacman", "-Sy"])
+
+    def after_update(self):
+        pass
+        # subprocess.run("timedatectl set-timezone $(curl -sf https://ipapi.co/timezone)".split())
